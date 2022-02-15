@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             {0, 4, 8}, {2, 4, 6}};                               //diagonal
 
     int activePlayer = 0;
+    int turnCount = 0;
     boolean gameActive = true;
 
     public void dropIn(View view) {
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
             gameState[tappedCounter] = activePlayer;
 
             counter.setTranslationY(-1500);
+
+            turnCount++;
 
             if (activePlayer == 0) {
                 counter.setImageResource(R.drawable.yellow);
@@ -69,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
                     winnerTextView.setVisibility(View.VISIBLE);
                 }
             }
+            if(turnCount == 9) {
+                Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
+                TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
+
+                winnerTextView.setText("TIE!");
+                playAgainButton.setVisibility(View.VISIBLE);
+                winnerTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -93,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
         activePlayer = 0;
         gameActive = true;
+        turnCount = 0;
     }
 
     @Override
